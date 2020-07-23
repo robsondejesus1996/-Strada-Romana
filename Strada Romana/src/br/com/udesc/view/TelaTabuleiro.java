@@ -18,41 +18,36 @@ import javax.swing.JOptionPane;
  * @author Robson
  */
 public class TelaTabuleiro extends javax.swing.JFrame {
-    
-   
+
     /**
      * Creates new form TelaTabuleiro
      */
 //    public TelaTabuleiro() {
 //        initComponents();
 //    }
-    
-    private TelaTabuleiro()throws Exception{
+    private TelaTabuleiro() throws Exception {
         super("Strada romana");
         initComponents();
-        
-        try{
+
+        try {
             JFrame.setDefaultLookAndFeelDecorated(rootPaneCheckingEnabled);
-            
-        }catch(Exception e){
-            
+
+        } catch (Exception e) {
+
         }
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    
+
     //teste desenvolvimento singleton 
     private static TelaTabuleiro instance;
-    
-    public static TelaTabuleiro getInstance()throws Exception{
-        if(instance == null){
+
+    public static TelaTabuleiro getInstance() throws Exception {
+        if (instance == null) {
             instance = new TelaTabuleiro();
         }
         return instance;
     }
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -160,7 +155,6 @@ public class TelaTabuleiro extends javax.swing.JFrame {
         lblPontosPlayer5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         jButton1.setForeground(new java.awt.Color(51, 204, 0));
         jButton1.setText("Iniciar Jogo");
@@ -202,6 +196,11 @@ public class TelaTabuleiro extends javax.swing.JFrame {
         jLabel16.setText("5");
 
         panel1.setBackground(new java.awt.Color(255, 255, 255));
+        panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                panel1PropertyChange(evt);
+            }
+        });
 
         bln11.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -843,29 +842,62 @@ public class TelaTabuleiro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        
-        String jogador1 = JOptionPane.showInputDialog("Informe o nome do jogador 1: ");
-        String jogador2 = JOptionPane.showInputDialog("Informe o nome do jogador 2: ");
-        String jogador3 = JOptionPane.showInputDialog("Informe o nome do jogador 3: ");
-        String jogador4 = JOptionPane.showInputDialog("Informe o nome do jogador 4: ");
-        String jogador5 = JOptionPane.showInputDialog("Informe o nome do jogador 5: ");
-        
-        lblPlayer1.setText(jogador1);
-        lblPlayer2.setText(jogador2);
-        lblPlayer3.setText(jogador3);
-        lblPlayer4.setText(jogador4);
-        lblPlayer5.setText(jogador5);
 
-        lblPontosPlayer1.setText("0");
-        lblPontosPlayer2.setText("0");
-        lblPontosPlayer3.setText("0");
-        lblPontosPlayer4.setText("0");
-        lblPontosPlayer5.setText("0");
+        int numeroJodadores = Integer.parseInt(JOptionPane.showInputDialog("informe a quantidade de jogadores nessa partida: Ex: Minimo 2 player, maximo 5 player"));
 
-        
-        
-         
+
+        if (numeroJodadores == 2) {
+            String jogador1 = JOptionPane.showInputDialog("Informe o nome do jogador 1: ");
+            String jogador2 = JOptionPane.showInputDialog("Informe o nome do jogador 2: ");
+            lblPlayer1.setText(jogador2);
+            lblPlayer2.setText(jogador2);
+            lblPlayer3.setText("não informado");
+            lblPlayer4.setText("não informado");
+            lblPlayer5.setText("não informado");
+        } else if (numeroJodadores == 3) {
+            String jogador1 = JOptionPane.showInputDialog("Informe o nome do jogador 1: ");
+            String jogador2 = JOptionPane.showInputDialog("Informe o nome do jogador 2: ");
+            String jogador3 = JOptionPane.showInputDialog("Informe o nome do jogador 3: ");
+            lblPlayer1.setText(jogador1);
+            lblPlayer2.setText(jogador2);
+            lblPlayer3.setText(jogador3);
+            lblPlayer4.setText("não informado");
+            lblPlayer5.setText("não informado");
+
+        } else if (numeroJodadores == 4) {
+            String jogador1 = JOptionPane.showInputDialog("Informe o nome do jogador 1: ");
+            String jogador2 = JOptionPane.showInputDialog("Informe o nome do jogador 2: ");
+            String jogador3 = JOptionPane.showInputDialog("Informe o nome do jogador 3: ");
+            String jogador4 = JOptionPane.showInputDialog("Informe o nome do jogador 4: ");
+            lblPlayer1.setText(jogador1);
+            lblPlayer2.setText(jogador2);
+            lblPlayer3.setText(jogador3);
+            lblPlayer4.setText(jogador4);
+            lblPlayer5.setText("não informado");
+
+        } else if (numeroJodadores == 5) {
+            String jogador1 = JOptionPane.showInputDialog("Informe o nome do jogador 1: ");
+            String jogador2 = JOptionPane.showInputDialog("Informe o nome do jogador 2: ");
+            String jogador3 = JOptionPane.showInputDialog("Informe o nome do jogador 3: ");
+            String jogador4 = JOptionPane.showInputDialog("Informe o nome do jogador 4: ");
+            String jogador5 = JOptionPane.showInputDialog("Informe o nome do jogador 5: ");
+            lblPlayer1.setText(jogador1);
+            lblPlayer2.setText(jogador2);
+            lblPlayer3.setText(jogador3);
+            lblPlayer4.setText(jogador4);
+            lblPlayer5.setText(jogador5);
+        } else {
+            JOptionPane.showMessageDialog(null, "Quantidade de jogadores inválida");
+        }
+
+
+
+//        lblPontosPlayer1.setText("0");
+//        lblPontosPlayer2.setText("0");
+//        lblPontosPlayer3.setText("0");
+//        lblPontosPlayer4.setText("0");
+//        lblPontosPlayer5.setText("0");
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -876,6 +908,10 @@ public class TelaTabuleiro extends javax.swing.JFrame {
     private void bln60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bln60ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bln60ActionPerformed
+
+    private void panel1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_panel1PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panel1PropertyChange
 
     /**
      * @param args the command line arguments
